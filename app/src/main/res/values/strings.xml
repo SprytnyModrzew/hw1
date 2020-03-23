@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">hw1</string>
+
+    <string name="hint_name">Name</string>
+    <string name="hint_surname">Surname</string>
+    <string name="hint_birthday">Birthday</string>
+    <string name="hint_phone">Phone number</string>
+    <string name="hint_button">Add</string>
+    <string name="detail_not_selected">Not selected</string>
+</resources>

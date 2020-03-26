@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.e.hw1.db.Contact;
@@ -38,8 +39,12 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.O
         }
         else {
             //todo this line doesnt work
-            DetailViewModel viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
-            viewModel.setCurrent(contact);
+            FragmentManager fm = getSupportFragmentManager();
+            DetailFragment fragmentById = (DetailFragment) fm.findFragmentById(R.id.fragment2);
+            fragmentById.getmViewModel().setCurrent(contact);
+            /*DetailViewModel viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
+            viewModel.setCurrent(contact);*/
+
         }
     }
 

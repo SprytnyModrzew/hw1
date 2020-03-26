@@ -15,6 +15,7 @@ import com.e.hw1.db.Contact;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class AdderActivity extends AppCompatActivity implements DatePicker.OnDateChosenListener {
@@ -78,6 +79,7 @@ public class AdderActivity extends AppCompatActivity implements DatePicker.OnDat
     @Override
     public void onDateChosen(int year, int month, int dayOfMonth) {
         EditText textBirth = findViewById(R.id.textBirthday);
+        month++;
         String text = dayOfMonth + "/" + month + "/" + year;
         textBirth.setText(text);
         Log.i("userrr","działaaaa");

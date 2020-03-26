@@ -42,6 +42,7 @@ public class DetailFragment extends Fragment{
                 Log.e("userrr","onChanged");
             }
         });
+
         Button button = root.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +52,10 @@ public class DetailFragment extends Fragment{
         });
         return root;
     }
-
+    public DetailViewModel getmViewModel()
+    {
+        return mViewModel;
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

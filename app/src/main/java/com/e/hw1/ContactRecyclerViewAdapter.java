@@ -1,5 +1,6 @@
 package com.e.hw1;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -20,11 +21,12 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
     private final List<Contact> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public ContactRecyclerViewAdapter(List<Contact> items, OnListFragmentInteractionListener listener) {
+    ContactRecyclerViewAdapter(List<Contact> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -56,6 +58,13 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
                 }
             }
         });
+        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                mListener.onListFragmentLongClick(holder.mItem);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -68,14 +77,14 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mItemText;
-        public final ImageView mItemPic;
-        public final ImageButton mItemButton;
-        public Contact mItem;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
+        final TextView mItemText;
+        final ImageView mItemPic;
+        final ImageButton mItemButton;
+        Contact mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
             mItemText = view.findViewById(R.id.contactItemText);
@@ -83,6 +92,7 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
             mItemButton = view.findViewById(R.id.contactItemButton);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + "'";

@@ -8,7 +8,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.e.hw1.R;
 
 @Database(entities = Contact.class, version = 9, exportSchema = false)
 public abstract class ContactDatabase extends RoomDatabase {

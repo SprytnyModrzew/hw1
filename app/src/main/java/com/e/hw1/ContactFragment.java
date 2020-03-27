@@ -105,6 +105,8 @@ public class ContactFragment extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentInteraction(Contact item);
 
+        void onListFragmentLongClick(Contact item);
+
         void onButtonClick(Contact mItem);
     }
 }

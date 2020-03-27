@@ -1,15 +1,15 @@
 package com.e.hw1;
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -36,12 +36,16 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.O
         int orientation = getResources().getConfiguration().orientation;
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
             Log.e("userrr","portret");
+            setContentView(R.layout.activity_detail);
+            FragmentManager fm = getSupportFragmentManager();
+            DetailFragment fragmentById = (DetailFragment) fm.findFragmentById(R.id.fragment3);
+            fragmentById.getViewModel().setCurrent(contact);
         }
         else {
             //todo this line doesnt work
             FragmentManager fm = getSupportFragmentManager();
             DetailFragment fragmentById = (DetailFragment) fm.findFragmentById(R.id.fragment2);
-            fragmentById.getmViewModel().setCurrent(contact);
+            fragmentById.getViewModel().setCurrent(contact);
             /*DetailViewModel viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
             viewModel.setCurrent(contact);*/
 
@@ -49,8 +53,47 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.O
     }
 
     @Override
-    public void onButtonClick(Contact mItem) {
-        ContactViewModel contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
-        contactViewModel.delete(mItem);
+    public void onListFragmentLongClick(Contact item) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+        alert.setTitle("");
+        alert.setMessage(getString(R.string.hint_call)+" "+item.getName()+"?")
+        .setCancelable(false)
+        .setNegativeButton(getString(R.string.hint_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        })
+        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Calling...", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog alertDialog = alert.create();
+        alertDialog.show();
+    }
+
+    @Override
+    public void onButtonClick(final Contact item) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+        final ContactViewModel contactViewModel = new ViewModelProvider(this).get(ContactViewModel.class);
+        alert.setTitle("");
+        alert.setMessage(getString(R.string.hint_erase)+" "+item.getName()+"?")
+                .setCancelable(false)
+                .setNegativeButton(getString(R.string.hint_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        contactViewModel.delete(item);
+                    }
+                });
+        AlertDialog alertDialog = alert.create();
+        alertDialog.show();
     }
 }

@@ -7,4 +7,7 @@
     <string name="hint_phone">Phone number</string>
     <string name="hint_button">Add</string>
     <string name="detail_not_selected">Not selected</string>
+    <string name="hint_call">Call</string>
+    <string name="hint_erase">Erase</string>
+    <string name="hint_cancel">Cancel</string>
 </resources>

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +15,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.e.hw1.db.Contact;
-
-import org.w3c.dom.Text;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -59,7 +56,7 @@ public class DetailFragment extends Fragment{
         });
         return root;
     }
-    public DetailViewModel getmViewModel()
+    public DetailViewModel getViewModel()
     {
         return mViewModel;
     }

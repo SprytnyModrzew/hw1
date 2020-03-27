@@ -10,7 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.e.hw1.R;
 
-@Database(entities = Contact.class, version = 7, exportSchema = false)
+@Database(entities = Contact.class, version = 8, exportSchema = false)
 public abstract class ContactDatabase extends RoomDatabase {
     private static ContactDatabase instance;
 
@@ -43,8 +43,6 @@ public abstract class ContactDatabase extends RoomDatabase {
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    contactDao.insert(new Contact("2020", R.drawable.avatar_2, "Mama"));
-                    contactDao.insert(new Contact("3030", R.drawable.avatar_1, "mama"));
                 }
             });
             thread.start();

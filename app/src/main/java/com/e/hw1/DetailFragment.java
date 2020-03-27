@@ -17,6 +17,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.e.hw1.db.Contact;
 
+import org.w3c.dom.Text;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class DetailFragment extends Fragment{
 
     private DetailViewModel mViewModel;
@@ -32,6 +38,7 @@ public class DetailFragment extends Fragment{
         final TextView textName = root.findViewById(R.id.detailName);
         final ImageView image = root.findViewById(R.id.detailImage);
         final TextView textNumber = root.findViewById(R.id.detailNumber);
+        final TextView textBirth = root.findViewById(R.id.detailBirthday);
         Log.i("userrr", " wopppp");
         mViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
         mViewModel.getCurrent().observe(getViewLifecycleOwner(), new Observer<Contact>() {
@@ -39,15 +46,13 @@ public class DetailFragment extends Fragment{
             public void onChanged(Contact contact) {
                 textName.setText(String.format("%s %s", contact.getName(), contact.getSurname()));
                 image.setImageResource(contact.getImgPath());
-                Log.e("userrr","onChanged");
-            }
-        });
 
-        Button button = root.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mViewModel.setCurrent(new Contact("woop",R.drawable.avatar_3,"ee"));
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                Date date = new Date(contact.getDate());
+                String text = simpleDateFormat.format(date);
+                textBirth.setText(text);
+
+                Log.e("userrr","onChanged");
             }
         });
         return root;

@@ -14,12 +14,12 @@ import com.e.hw1.db.Contact;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class AdderActivity extends AppCompatActivity implements DatePicker.OnDateChosenListener {
-
+    long contactDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +40,14 @@ public class AdderActivity extends AppCompatActivity implements DatePicker.OnDat
             public void onClick(View v) {
                 EditText editText = findViewById(R.id.textName);
                 EditText editText1 = findViewById(R.id.textSurname);
+                EditText editText2 = findViewById(R.id.textBirthday);
+
                 String textName = editText.getText().toString();
                 String textSurname = editText1.getText().toString();
-                if(textName.isEmpty() || textSurname.isEmpty())
+                if(textName.isEmpty() || textSurname.isEmpty() || editText2.toString().isEmpty())
                     return;
-                contactViewModel.insert(new Contact(textName,randomPic(),textSurname));
+                //todo contact class -> birthday
+                contactViewModel.insert(new Contact(textName,randomPic(),textSurname, contactDate));
                 Log.i("userrr", "cos");
                 finish();
             }
@@ -70,7 +73,7 @@ public class AdderActivity extends AppCompatActivity implements DatePicker.OnDat
         pics.add(R.drawable.avatar_15);
         pics.add(R.drawable.avatar_16);
 
-        int max = 16;
+        int max = pics.size()-1;
         int min = 0;
         int range = max - min + 1;
         return pics.get((int) ((Math.random() * range) + min));
@@ -79,11 +82,17 @@ public class AdderActivity extends AppCompatActivity implements DatePicker.OnDat
     @Override
     public void onDateChosen(int year, int month, int dayOfMonth) {
         EditText textBirth = findViewById(R.id.textBirthday);
-        month++;
-        String text = dayOfMonth + "/" + month + "/" + year;
-        textBirth.setText(text);
         Log.i("userrr","działaaaa");
-
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        contactDate = cal.getTimeInMillis();
+        Date date = new Date(contactDate);
+        Log.i("userrr","działaaaa "+simpleDateFormat.format(date));
+        String text = simpleDateFormat.format(date);
+        textBirth.setText(text);
     }
 }
 

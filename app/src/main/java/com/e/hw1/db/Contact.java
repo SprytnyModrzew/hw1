@@ -20,10 +20,14 @@ public class Contact {
     @NonNull
     private int imgPath;
 
-    public Contact(@NonNull String name, @NonNull int imgPath, String surname) {
+    @NonNull
+    private long date;
+
+    public Contact(@NonNull String name, @NonNull int imgPath, String surname, long date) {
         this.name = name;
         this.imgPath = imgPath;
         this.surname = surname;
+        this.date = date;
     }
 
 
@@ -59,5 +63,13 @@ public class Contact {
 
     public void setSurname(@NonNull String surname) {
         this.surname = surname;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 }

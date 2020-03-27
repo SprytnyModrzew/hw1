@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.O
             Log.e("userrr","portret");
             setContentView(R.layout.activity_detail);
             FragmentManager fm = getSupportFragmentManager();
-            DetailFragment fragmentById = (DetailFragment) fm.findFragmentById(R.id.fragment3);
+            DetailFragment fragmentById = (DetailFragment) fm.findFragmentById(R.id.fragment2);
             fragmentById.getViewModel().setCurrent(contact);
         }
         else {

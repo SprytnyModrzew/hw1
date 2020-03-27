@@ -10,7 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.e.hw1.R;
 
-@Database(entities = Contact.class, version = 8, exportSchema = false)
+@Database(entities = Contact.class, version = 9, exportSchema = false)
 public abstract class ContactDatabase extends RoomDatabase {
     private static ContactDatabase instance;
 

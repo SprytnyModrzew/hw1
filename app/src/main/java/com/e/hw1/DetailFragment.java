@@ -52,6 +52,8 @@ public class DetailFragment extends Fragment{
                 String text = simpleDateFormat.format(date);
                 textBirth.setText(text);
 
+                textNumber.setText(contact.getNumber());
+
                 Log.e("userrr","onChanged");
             }
         });

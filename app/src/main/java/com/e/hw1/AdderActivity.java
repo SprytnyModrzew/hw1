@@ -41,13 +41,15 @@ public class AdderActivity extends AppCompatActivity implements DatePicker.OnDat
                 EditText editText = findViewById(R.id.textName);
                 EditText editText1 = findViewById(R.id.textSurname);
                 EditText editText2 = findViewById(R.id.textBirthday);
+                EditText editText3 = findViewById(R.id.textNumber);
 
                 String textName = editText.getText().toString();
                 String textSurname = editText1.getText().toString();
-                if(textName.isEmpty() || textSurname.isEmpty() || editText2.toString().isEmpty())
+                String textNumber = editText3.getText().toString();
+                if(textName.isEmpty() || textSurname.isEmpty() || editText2.toString().isEmpty() || faultyText(textNumber))
                     return;
                 //todo contact class -> birthday
-                contactViewModel.insert(new Contact(textName,randomPic(),textSurname, contactDate));
+                contactViewModel.insert(new Contact(textName,randomPic(),textSurname, contactDate,textNumber));
                 Log.i("userrr", "cos");
                 finish();
             }
@@ -93,6 +95,29 @@ public class AdderActivity extends AppCompatActivity implements DatePicker.OnDat
         Log.i("userrr","działaaaa "+simpleDateFormat.format(date));
         String text = simpleDateFormat.format(date);
         textBirth.setText(text);
+    }
+    private boolean faultyText(String number){
+        if(number.length() == 9){
+            for(int i = 0; i < number.length(); i++){
+                switch(number.charAt(i)){
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        break;
+                    default:
+                        return true;
+                }
+
+            }
+            return false;
+        }
+        return true;
     }
 }
 

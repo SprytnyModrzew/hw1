@@ -23,11 +23,15 @@ public class Contact {
     @NonNull
     private long date;
 
-    public Contact(@NonNull String name, @NonNull int imgPath, String surname, long date) {
+    @NonNull
+    private String number;
+
+    public Contact(@NonNull String name, @NonNull int imgPath, String surname, long date, String number) {
         this.name = name;
         this.imgPath = imgPath;
         this.surname = surname;
         this.date = date;
+        this.number = number;
     }
 
 
@@ -71,5 +75,14 @@ public class Contact {
 
     public void setDate(long date) {
         this.date = date;
+    }
+
+    @NonNull
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(@NonNull String number) {
+        this.number = number;
     }
 }

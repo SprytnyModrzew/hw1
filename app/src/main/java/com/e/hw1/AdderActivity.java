@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -46,8 +47,9 @@ public class AdderActivity extends AppCompatActivity implements DatePicker.OnDat
                 String textName = editText.getText().toString();
                 String textSurname = editText1.getText().toString();
                 String textNumber = editText3.getText().toString();
-                if(textName.isEmpty() || textSurname.isEmpty() || editText2.toString().isEmpty() || faultyText(textNumber))
-                    return;
+                if(textName.isEmpty() || textSurname.isEmpty() || editText2.toString().isEmpty() || faultyText(textNumber)){
+                    Toast.makeText(getApplicationContext(), "Something went wrong... did you put your data properly?", Toast.LENGTH_LONG).show();
+                    return;}
                 //todo contact class -> birthday
                 contactViewModel.insert(new Contact(textName,randomPic(),textSurname, contactDate,textNumber));
                 Log.i("userrr", "cos");

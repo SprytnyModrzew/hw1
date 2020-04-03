@@ -22,7 +22,7 @@ import java.util.Locale;
 
 public class DetailFragment extends Fragment{
 
-    private DetailViewModel mViewModel;
+    public DetailViewModel mViewModel;
 
     public static DetailFragment newInstance() {
         return new DetailFragment();
@@ -63,5 +63,10 @@ public class DetailFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    public void setContactInfo(Contact contact){
+        mViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
+        mViewModel.setCurrent(contact);
     }
 }

@@ -17,8 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <fragment
-        android:id="@+id/fragment"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentcore"
         android:name="com.e.hw1.ContactFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"

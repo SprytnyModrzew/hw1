@@ -36,13 +36,13 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.O
         int orientation = getResources().getConfiguration().orientation;
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
             Log.e("userrr","portret");
-            setContentView(R.layout.activity_detail);
             FragmentManager fm = getSupportFragmentManager();
-            DetailFragment fragmentById = (DetailFragment) fm.findFragmentById(R.id.fragment2);
-            fragmentById.getViewModel().setCurrent(contact);
+            DetailFragment fragmentById = DetailFragment.newInstance();
+            //todo below
+            fm.beginTransaction().replace(R.id.fragmentcore, fragmentById).commit();
+            //fragmentById.setContactInfo(contact);
         }
         else {
-            //todo this line doesnt work
             FragmentManager fm = getSupportFragmentManager();
             DetailFragment fragmentById = (DetailFragment) fm.findFragmentById(R.id.fragment2);
             fragmentById.getViewModel().setCurrent(contact);

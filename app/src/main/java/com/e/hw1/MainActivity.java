@@ -17,6 +17,8 @@ import com.e.hw1.db.Contact;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity implements ContactFragment.OnListFragmentInteractionListener {
+    boolean detail = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +34,27 @@ public class MainActivity extends AppCompatActivity implements ContactFragment.O
     }
 
     @Override
+    public void onBackPressed() {
+        if(detail) {
+            getSupportFragmentManager().popBackStack();
+            detail = false;
+        }
+        else
+        super.onBackPressed();
+    }
+
+    @Override
     public void onListFragmentInteraction(Contact contact) {
         int orientation = getResources().getConfiguration().orientation;
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
             Log.e("userrr","portret");
             FragmentManager fm = getSupportFragmentManager();
-            DetailFragment fragmentById = DetailFragment.newInstance();
+            DetailFragment fragmentById = DetailFragment.newInstance(contact);
             //todo below
-            fm.beginTransaction().replace(R.id.fragmentcore, fragmentById).commit();
+            fm.beginTransaction().replace(R.id.fragmentcore, fragmentById).addToBackStack(null).commit();
+            //fragmentById.getViewModel().setCurrent(contact);
             //fragmentById.setContactInfo(contact);
+            detail = true;
         }
         else {
             FragmentManager fm = getSupportFragmentManager();

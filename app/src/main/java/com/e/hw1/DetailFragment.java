@@ -22,9 +22,11 @@ import java.util.Locale;
 
 public class DetailFragment extends Fragment{
 
-    public DetailViewModel mViewModel;
+    public static DetailViewModel mViewModel;
 
-    public static DetailFragment newInstance() {
+    public static DetailFragment newInstance(Contact contact) {
+        //mViewModel.setCurrent(contact);
+        Log.e("userrr","went in");
         return new DetailFragment();
     }
 

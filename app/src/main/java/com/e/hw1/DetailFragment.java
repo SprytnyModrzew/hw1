@@ -22,12 +22,14 @@ import java.util.Locale;
 
 public class DetailFragment extends Fragment{
 
-    public static DetailViewModel mViewModel;
+    public DetailViewModel mViewModel;
 
-    public static DetailFragment newInstance(Contact contact) {
-        //mViewModel.setCurrent(contact);
+    public DetailFragment(DetailViewModel mViewModel) {
+        this.mViewModel = mViewModel;
         Log.e("userrr","went in");
-        return new DetailFragment();
+    }
+
+    public DetailFragment() {
     }
 
     @Override
@@ -39,7 +41,9 @@ public class DetailFragment extends Fragment{
         final TextView textNumber = root.findViewById(R.id.detailNumber);
         final TextView textBirth = root.findViewById(R.id.detailBirthday);
         Log.i("userrr", " wopppp");
+        if(mViewModel == null){
         mViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
+        }
         mViewModel.getCurrent().observe(getViewLifecycleOwner(), new Observer<Contact>() {
             @Override
             public void onChanged(Contact contact) {
@@ -68,7 +72,7 @@ public class DetailFragment extends Fragment{
     }
 
     public void setContactInfo(Contact contact){
-        mViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
         mViewModel.setCurrent(contact);
     }
+
 }

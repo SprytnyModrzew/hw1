@@ -14,7 +14,7 @@ public class DetailViewModel extends AndroidViewModel {
     public DetailViewModel(@NonNull Application application) {
         super(application);
         current = new MutableLiveData<>();
-        current.setValue(new Contact(getApplication().getString(R.string.detail_not_selected), R.drawable.avatar_1, "", 200, "777777777"));
+        current.setValue(new Contact(getApplication().getString(R.string.detail_not_selected), R.drawable.avatar_1, "", 0, ""));
     }
 
 
